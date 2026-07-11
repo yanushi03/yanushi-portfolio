@@ -81,8 +81,32 @@
     font-weight:500;transition:background .2s;
   }
   .nav-cta:hover{background:var(--blue-dark);}
+  .nav-actions{display:flex;align-items:center;gap:10px;}
+  .nav-burger{
+    display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+    width:38px;height:38px;border-radius:10px;border:1px solid var(--light);background:var(--card);
+    cursor:pointer;padding:0;flex:0 0 auto;
+  }
+  .nav-burger span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s;}
+  .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-burger.open span:nth-child(2){opacity:0;}
+  .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    position:absolute;top:100%;left:0;right:0;
+    max-height:0;overflow:hidden;background:var(--bg);border-bottom:0 solid var(--light);
+    display:flex;flex-direction:column;transition:max-height .3s ease,border-bottom-width .3s ease;
+  }
+  .mobile-menu a{
+    padding:14px 24px;text-decoration:none;color:var(--ink);font-size:15px;font-weight:500;
+    border-top:1px solid var(--light);
+  }
+  .mobile-menu.open{max-height:320px;border-bottom-width:1px;}
   @media (max-width:720px){
-    .nav-links a:not(.nav-cta){display:none;}
+    .nav-links{display:none;}
+    .nav-burger{display:flex;}
+  }
+  @media (min-width:721px){
+    .mobile-menu{display:none;}
   }
   main{padding-top:var(--navh);}
   @media (min-width:900px) and (min-height:640px){main{padding-top:0;}}
@@ -267,7 +291,11 @@
   .car-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
   .car-btn.prev{left:-14px;}
   .car-btn.next{right:-14px;}
-  @media(max-width:640px){.car-btn.prev{left:2px;}.car-btn.next{right:2px;}}
+  @media(max-width:640px){
+    .car-btn.prev{left:2px;}.car-btn.next{right:2px;}
+    .carousel{gap:16px;padding:6px 0 18px;}
+    .card{flex-basis:100%;}
+  }
 
   /* ---------- About ---------- */
   .about-grid{display:grid;grid-template-columns:320px 1fr;gap:52px;align-items:center;}
@@ -514,8 +542,20 @@
       <a href="#/" onclick="goSection('skills');return false;">Skills</a>
       <a href="#/" onclick="goSection('experience');return false;">Experience</a>
       <a href="#/" onclick="goSection('education');return false;">Education</a>
-      <a class="nav-cta" href="mailto:ys.demel.2023@scis.smu.edu.sg">Let's talk</a>
     </div>
+    <div class="nav-actions">
+      <a class="nav-cta" href="mailto:ys.demel.2023@scis.smu.edu.sg">Let's talk</a>
+      <button class="nav-burger" id="navBurger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#/" onclick="goSection('work');closeMenu();return false;">Work</a>
+    <a href="#/" onclick="goSection('about');closeMenu();return false;">About</a>
+    <a href="#/" onclick="goSection('skills');closeMenu();return false;">Skills</a>
+    <a href="#/" onclick="goSection('experience');closeMenu();return false;">Experience</a>
+    <a href="#/" onclick="goSection('education');closeMenu();return false;">Education</a>
   </div>
 </nav>
 
@@ -951,6 +991,20 @@ function slideWork(dir){
 function showXp(i){
   document.querySelectorAll(".xp-btn").forEach(b=>b.classList.toggle("active",b.getAttribute("data-xp")==String(i)));
   document.querySelectorAll(".xp-panel").forEach(p=>p.classList.toggle("active",p.getAttribute("data-xp-panel")==String(i)));
+}
+
+function toggleMenu(){
+  const menu = document.getElementById("mobileMenu");
+  const btn = document.getElementById("navBurger");
+  const isOpen = menu.classList.toggle("open");
+  btn.classList.toggle("open", isOpen);
+  btn.setAttribute("aria-expanded", String(isOpen));
+}
+
+function closeMenu(){
+  document.getElementById("mobileMenu").classList.remove("open");
+  document.getElementById("navBurger").classList.remove("open");
+  document.getElementById("navBurger").setAttribute("aria-expanded","false");
 }
 
 function showEdu(key){
