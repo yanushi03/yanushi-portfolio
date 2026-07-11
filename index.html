@@ -906,4 +906,109 @@ function footerHTML(){
    dashed placeholder, null hides the button entirely. */
 function linkButtons(p){
   let out = "";
-  if(p.live) out += `<a class="btn solid" href="${p.live}" target="_blank" rel="noopener">${p.liveL
+  if(p.live) out += `<a class="btn solid" href="${p.live}" target="_blank" rel="noopener">${p.liveLabel || "View live app ↗"}</a>`;
+  if(p.github === "soon") out += `<span class="btn placeholder">GitHub, link coming soon</span>`;
+  else if(p.github) out += `<a class="btn" href="${p.github}" target="_blank" rel="noopener">GitHub ↗</a>`;
+  if(p.video === "soon") out += `<span class="btn placeholder">Video, coming soon</span>`;
+  else if(p.video) out += `<a class="btn" href="${p.video}" target="_blank" rel="noopener">Watch video ↗</a>`;
+  return out;
+}
+
+function projectHTML(p){
+  const i = PROJECTS.indexOf(p);
+  const prev = PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length];
+  const next = PROJECTS[(i + 1) % PROJECTS.length];
+  const links = linkButtons(p);
+  return `
+  <div class="detail wrap fade" style="--acc:${p.accent}">
+    <a class="back" href="#/">← Back to all work</a>
+    <div class="ptag">${p.type} · ${String(i+1).padStart(2,"0")} / 06</div>
+    <h1>${p.title}</h1>
+    <p class="sub">${p.short}</p>
+    <div class="meta-bar">
+      <div><b>Type</b><span>${p.type}</span></div>
+      <div><b>Timeline</b><span>${p.date}</span></div>
+      <div><b>Tools</b><span>${p.tools}</span></div>
+    </div>
+    <div class="detail-hero">${shotHTML(p)}</div>
+    <div class="detail-sec"><h3><i>a.</i>Overview</h3><p>${p.overview}</p></div>
+    <div class="detail-sec"><h3><i>b.</i>What I did</h3><ul>${p.points.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    <div class="detail-sec"><h3><i>c.</i>Outcome</h3><p>${p.outcome}</p></div>
+    ${links ? `<div class="detail-sec"><h3><i>d.</i>Links</h3><div class="link-row">${links}</div></div>` : ""}
+    <div class="pager">
+      <a href="#/project/${prev.slug}">← Previous<b>${prev.title}</b></a>
+      <a href="#/project/${next.slug}" style="text-align:right;">Next →<b>${next.title}</b></a>
+    </div>
+  </div>`;
+}
+
+/* ---------- Interactions ---------- */
+function slideWork(dir){
+  const c = document.getElementById("workCarousel");
+  if(c) c.scrollBy({left:dir*424,behavior:"smooth"});
+}
+
+function showXp(i){
+  document.querySelectorAll(".xp-btn").forEach(b=>b.classList.toggle("active",b.getAttribute("data-xp")==String(i)));
+  document.querySelectorAll(".xp-panel").forEach(p=>p.classList.toggle("active",p.getAttribute("data-xp-panel")==String(i)));
+}
+
+function showEdu(key){
+  document.querySelectorAll(".pill-btn").forEach(b=>b.classList.toggle("active",b.getAttribute("data-edu")===key));
+  document.querySelectorAll(".edu-pane").forEach(p=>p.classList.toggle("active",p.getAttribute("data-edu-pane")===key));
+}
+
+/* ---------- Router ---------- */
+const app = document.getElementById("app");
+let pendingSection = null;
+
+function initReveals(){
+  const els = document.querySelectorAll(".reveal:not(.visible)");
+  if(!("IntersectionObserver" in window)){
+    els.forEach(el=>el.classList.add("visible"));
+    return;
+  }
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        en.target.classList.add("visible");
+        io.unobserve(en.target);
+      }
+    });
+  },{threshold:0.12,rootMargin:"0px 0px -6% 0px"});
+  els.forEach(el=>io.observe(el));
+}
+
+function render(){
+  const hash = location.hash || "#/";
+  const m = hash.match(/^#\/project\/(.+)$/);
+  if(m){
+    const p = PROJECTS.find(x=>x.slug===m[1]);
+    app.innerHTML = p ? projectHTML(p) : homeHTML();
+  } else {
+    app.innerHTML = homeHTML();
+  }
+  if(pendingSection){
+    const el = document.getElementById(pendingSection);
+    pendingSection = null;
+    if(el){ el.scrollIntoView({behavior:"smooth"}); initReveals(); return; }
+  }
+  window.scrollTo(0,0);
+  initReveals();
+}
+
+function goSection(id){
+  if(location.hash && location.hash !== "#/"){
+    pendingSection = id;
+    location.hash = "#/";
+  } else {
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:"smooth"});
+  }
+}
+
+window.addEventListener("hashchange", render);
+render();
+</script>
+</body>
+</html>
