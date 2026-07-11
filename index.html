@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yanushi de Mel</title>
+<!--
+  ============================================================
+  ADDING YOUR SCREENSHOTS
+  Create a folder called "images" next to this file and drop
+  screenshots in with these exact names:
+    images/climate-etl.png
+    images/pink-ribbon.png
+    images/pilates-agent.jpg
+    images/inclusive-fintech.png
+    images/blockchain-payments.png
+    images/agile-delivery.png
+  Until an image exists, a designed gradient cover shows
+  instead, so the site never looks broken.
+
+  ADDING YOUR LINKS
+  Search for "REPLACE_ME" in the PROJECTS array below.
+  A URL string renders a button, "soon" renders a dashed
+  placeholder, null hides the button entirely.
+  ============================================================
+-->
+<style>
+  :root{
+    --ink:#101014;
+    --grey:#5f5f66;
+    --light:#e7e7e9;
+    --bg:#fafaf7;
+    --card:#ffffff;
+    --blue:#1f2ff0;
+    --blue-dark:#131fb8;
+    --blue-tint:#eef0ff;
+    --maxw:1080px;
+    --navh:62px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);
+    -webkit-font-smoothing:antialiased;line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%;}
+
+  /* ---------- Full-page snap (desktop only) ---------- */
+  section, .hero-page, .foot-page{padding:64px 0;}
+  @media (min-width:900px) and (min-height:640px){
+    html{scroll-snap-type:y proximity;}
+    .snap{
+      scroll-snap-align:start;
+      min-height:100vh;
+      display:flex;flex-direction:column;justify-content:center;
+      padding:calc(var(--navh) + 12px) 0 28px;
+    }
+    footer.snap{justify-content:center;}
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;height:var(--navh);
+    background:rgba(250,250,247,.88);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--light);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:0 24px;height:100%;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .nav-name{font-weight:650;font-size:15px;text-decoration:none;}
+  .nav-name b{color:var(--blue);}
+  .nav-links{display:flex;gap:22px;align-items:center;}
+  .nav-links a{text-decoration:none;font-size:14px;color:var(--grey);transition:color .15s;}
+  .nav-links a:hover{color:var(--blue);}
+  .nav-cta{
+    background:var(--blue);color:#fff !important;padding:8px 18px;border-radius:100px;
+    font-weight:500;transition:background .2s;
+  }
+  .nav-cta:hover{background:var(--blue-dark);}
+  @media (max-width:720px){
+    .nav-links a:not(.nav-cta){display:none;}
+  }
+  main{padding-top:var(--navh);}
+  @media (min-width:900px) and (min-height:640px){main{padding-top:0;}}
+
+  /* ---------- Hero ---------- */
+  .hero-page{position:relative;}
+  .hero-page::before{
+    content:"";position:absolute;top:-120px;right:-140px;width:480px;height:480px;
+    background:radial-gradient(circle,rgba(31,47,240,.14),transparent 65%);
+    border-radius:50%;pointer-events:none;
+  }
+  .hero-page::after{
+    content:"";position:absolute;bottom:-40px;left:-160px;width:380px;height:380px;
+    background:radial-gradient(circle,rgba(219,39,119,.09),transparent 65%);
+    border-radius:50%;pointer-events:none;
+  }
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;letter-spacing:.05em;color:var(--blue);
+    border:1px solid rgba(31,47,240,.3);background:var(--blue-tint);
+    padding:6px 16px;border-radius:100px;margin-bottom:24px;font-weight:500;
+  }
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .hero-page h1{
+    font-size:clamp(44px,7.5vw,86px);font-weight:680;
+    letter-spacing:-.035em;line-height:1.0;margin-bottom:16px;
+  }
+  .hero-page h1 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--blue);}
+  .roles{
+    font-size:clamp(18px,2.5vw,25px);font-weight:500;letter-spacing:-.01em;
+    margin-bottom:22px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
+  }
+  .roles .flip{
+    display:inline-block;position:relative;color:var(--blue);
+    height:1.45em;overflow:hidden;vertical-align:bottom;min-width:330px;
+  }
+  .roles .flip span{
+    display:block;height:1.45em;line-height:1.45em;
+    animation:flipwords 9s cubic-bezier(.6,0,.2,1) infinite;
+  }
+  @keyframes flipwords{
+    0%,26%{transform:translateY(0);}
+    33%,59%{transform:translateY(-1.45em);}
+    66%,92%{transform:translateY(-2.9em);}
+    100%{transform:translateY(-4.35em);}
+  }
+  @media(max-width:520px){.roles .flip{min-width:240px;}}
+  .hero-page p{max-width:560px;font-size:16px;color:var(--grey);}
+  .hero-cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 24px;border-radius:100px;font-size:14px;font-weight:500;
+    text-decoration:none;border:1px solid var(--ink);
+    transition:all .2s;cursor:pointer;background:transparent;color:var(--ink);
+  }
+  .btn.solid{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .btn.solid:hover{background:var(--blue-dark);border-color:var(--blue-dark);transform:translateY(-2px);}
+  .btn:hover{background:var(--ink);color:var(--bg);transform:translateY(-2px);}
+  .btn.placeholder{border:1px dashed #c5c5c2;color:#a3a3a0;cursor:default;}
+  .btn.placeholder:hover{background:transparent;color:#a3a3a0;transform:none;}
+
+  /* ---------- Marquee ---------- */
+  .marquee{
+    background:var(--blue);color:#fff;overflow:hidden;white-space:nowrap;
+    padding:12px 0;transform:rotate(-1deg) scale(1.04);margin-top:46px;
+  }
+  .marquee-track{display:inline-block;animation:marquee 26s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  .marquee span{font-size:13.5px;font-weight:500;letter-spacing:.04em;margin:0 16px;}
+  .marquee .diamond{opacity:.6;}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- Section headers ---------- */
+  .sec-head{
+    display:flex;align-items:baseline;justify-content:space-between;
+    border-top:1px solid var(--ink);padding-top:20px;margin-bottom:34px;gap:16px;
+  }
+  .sec-head h2{
+    font-size:clamp(28px,4vw,42px);font-weight:660;
+    letter-spacing:-.025em;line-height:1.05;
+  }
+  .sec-head h2 i{font-family:Georgia,serif;font-weight:400;color:var(--blue);margin-right:10px;font-size:.55em;vertical-align:.35em;letter-spacing:0;}
+  .sec-head span{font-size:13px;color:var(--grey);white-space:nowrap;}
+
+  /* ---------- Screenshot frames ---------- */
+  .shot{
+    position:relative;width:100%;height:100%;
+    background:linear-gradient(135deg,var(--acc) 0%,color-mix(in srgb,var(--acc) 55%,#12122e) 100%);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  .shot .ph{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:6px;color:#fff;text-align:center;padding:16px;
+  }
+  .shot .ph .mono{font-family:Georgia,serif;font-style:italic;font-size:clamp(40px,6vw,64px);line-height:1;opacity:.95;}
+  .shot .ph .cap{font-size:11px;text-transform:uppercase;letter-spacing:.18em;opacity:.75;font-weight:500;}
+  .shot .ph::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 78% 18%,rgba(255,255,255,.22),transparent 45%);
+  }
+  .shot img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;z-index:2;
+  }
+  .shot img.fit-contain{object-fit:contain;background:#fff;}
+  /* browser frame fills the whole card */
+  .frame-browser{
+    width:100%;height:100%;overflow:hidden;position:relative;
+    display:flex;flex-direction:column;background:#fff;
+  }
+  .frame-browser .bar{
+    height:30px;background:#f0f0f2;border-bottom:1px solid #e2e2e6;flex:0 0 auto;
+    display:flex;align-items:center;gap:6px;padding:0 12px;
+  }
+  .frame-browser .bar .d{width:8px;height:8px;border-radius:50%;}
+  .frame-browser .bar .d:nth-child(1){background:#ff5f57;}
+  .frame-browser .bar .d:nth-child(2){background:#febc2e;}
+  .frame-browser .bar .d:nth-child(3){background:#28c840;}
+  .frame-browser .bar .url{
+    flex:1;max-width:65%;margin-left:8px;background:#fff;border:1px solid #e2e2e6;
+    border-radius:100px;font-size:9px;color:#9a9aa2;padding:2px 10px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .frame-browser .screen{flex:1;position:relative;background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 14%,white),color-mix(in srgb,var(--acc) 30%,white));}
+  .frame-browser .screen .ph{color:var(--acc);}
+  .frame-browser .screen .ph::before{display:none;}
+  /* phone frame */
+  .frame-phone{
+    height:88%;aspect-ratio:9/18.5;border-radius:26px;overflow:hidden;position:relative;
+    border:6px solid #17171c;background:#fff;box-shadow:0 18px 44px rgba(0,0,0,.32);
+  }
+  .frame-phone .notch{
+    position:absolute;top:6px;left:50%;transform:translateX(-50%);
+    width:38%;height:12px;background:#17171c;border-radius:100px;z-index:4;
+  }
+  .frame-phone .screen{position:absolute;inset:0;background:linear-gradient(160deg,color-mix(in srgb,var(--acc) 14%,white),color-mix(in srgb,var(--acc) 32%,white));}
+  .frame-phone .screen .ph{color:var(--acc);}
+  .frame-phone .screen .ph::before{display:none;}
+  .frame-phone .screen .ph .mono{font-size:clamp(30px,4vw,44px);}
+
+  /* ---------- Work carousel ---------- */
+  .carousel-shell{position:relative;}
+  .carousel{
+    display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:6px 4px 18px;scrollbar-width:none;
+  }
+  .carousel::-webkit-scrollbar{display:none;}
+  .card{
+    text-decoration:none;display:block;flex:0 0 min(400px,84vw);
+    scroll-snap-align:start;
+  }
+  .card .thumb{
+    aspect-ratio:16/10;border-radius:16px;border:1px solid var(--light);
+    overflow:hidden;position:relative;
+    transition:transform .35s cubic-bezier(.2,.65,.2,1),box-shadow .35s,border-color .3s;
+  }
+  .card:hover .thumb{border-color:color-mix(in srgb,var(--acc) 40%,white);}
+  .card:hover .thumb{
+    transform:translateY(-6px) rotate(-.6deg);
+    box-shadow:0 18px 40px color-mix(in srgb,var(--acc) 30%,transparent);
+  }
+  .card .tag{
+    position:absolute;top:14px;left:14px;font-size:12px;font-weight:600;z-index:5;
+    background:rgba(255,255,255,.92);color:var(--acc);padding:4px 12px;border-radius:100px;letter-spacing:.03em;
+  }
+  .card .idx{
+    position:absolute;bottom:10px;right:12px;font-family:Georgia,serif;font-style:italic;
+    font-size:13px;color:#fff;z-index:5;
+    background:rgba(16,16,20,.55);padding:2px 11px;border-radius:100px;
+    backdrop-filter:blur(4px);
+  }
+  .card h3{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-top:14px;}
+  .card .meta{font-size:13px;color:var(--grey);margin-top:3px;}
+  .card .arrow{display:inline-block;margin-left:6px;transition:transform .25s;color:var(--acc);}
+  .card:hover .arrow{transform:translateX(4px);}
+  .car-btn{
+    position:absolute;top:34%;width:46px;height:46px;border-radius:50%;
+    border:1px solid var(--light);background:var(--card);cursor:pointer;
+    font-size:17px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);transition:all .2s;z-index:5;color:var(--ink);
+  }
+  .car-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .car-btn.prev{left:-14px;}
+  .car-btn.next{right:-14px;}
+  @media(max-width:640px){.car-btn.prev{left:2px;}.car-btn.next{right:2px;}}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:320px 1fr;gap:52px;align-items:center;}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:40px;justify-items:center;}}
+  .about-text{font-size:16.5px;line-height:1.65;}
+  .about-text + .about-text{margin-top:16px;}
+  .about-text mark{background:linear-gradient(transparent 62%,rgba(31,47,240,.18) 62%);color:inherit;padding:0 2px;}
+  /* photo composition */
+  .me-wrap{position:relative;max-width:320px;width:100%;}
+  .me-wrap::before{
+    content:"";position:absolute;inset:0;border-radius:20px;
+    background:linear-gradient(135deg,var(--blue),#4a2fe0);
+    transform:rotate(4deg);transition:transform .4s cubic-bezier(.2,.65,.2,1);
+  }
+  .me-wrap:hover::before{transform:rotate(1.5deg);}
+  .me-frame{
+    position:relative;border-radius:20px;overflow:hidden;
+    transform:rotate(-2.5deg);transition:transform .4s cubic-bezier(.2,.65,.2,1);
+    box-shadow:0 16px 38px rgba(0,0,0,.14);
+  }
+  .me-wrap:hover .me-frame{transform:rotate(0);}
+  .me-frame img{display:block;width:100%;height:auto;}
+  .me-chip{
+    position:absolute;background:#fff;border:1px solid var(--light);
+    box-shadow:0 8px 22px rgba(0,0,0,.1);border-radius:100px;
+    padding:7px 16px;font-size:13px;font-weight:600;z-index:3;white-space:nowrap;
+  }
+  .me-chip.c1{top:12px;right:-26px;transform:rotate(6deg);color:var(--blue);}
+  .me-chip.c2{bottom:16px;left:-24px;transform:rotate(-5deg);}
+  @media(max-width:760px){.me-chip.c1{right:-4px;}.me-chip.c2{left:-4px;}}
+  /* right now list */
+  .now{margin-top:26px;border-top:1px solid var(--light);padding-top:18px;}
+  .now-title{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);font-weight:650;margin-bottom:10px;}
+  .now ul{list-style:none;}
+  .now li{font-size:15px;line-height:1.6;padding:6px 0 6px 24px;position:relative;color:var(--ink);}
+  .now li::before{content:"→";position:absolute;left:0;color:var(--blue);font-size:13px;top:8px;}
+
+  /* ---------- Skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media(max-width:880px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-card{
+    background:var(--card);border:1px solid var(--light);border-radius:16px;
+    padding:22px;position:relative;overflow:hidden;
+    transition:transform .3s cubic-bezier(.2,.6,.2,1),border-color .3s,box-shadow .3s;
+  }
+  .skill-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--acc);}
+  .skill-card:hover{
+    transform:translateY(-5px);border-color:color-mix(in srgb,var(--acc) 45%,white);
+    box-shadow:0 14px 32px color-mix(in srgb,var(--acc) 12%,transparent);
+  }
+  .skill-card .num{font-family:Georgia,serif;font-style:italic;font-size:14px;color:var(--acc);}
+  .skill-card .cat{font-size:15.5px;font-weight:600;margin:4px 0 12px;letter-spacing:-.01em;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{
+    font-size:12.5px;padding:4px 12px;border-radius:100px;
+    border:1px solid color-mix(in srgb,var(--acc) 30%,white);
+    background:color-mix(in srgb,var(--acc) 6%,white);color:var(--ink);
+    transition:all .2s;
+  }
+  .skill-card:hover .chip{border-color:color-mix(in srgb,var(--acc) 55%,white);}
+
+  /* ---------- Experience tabs ---------- */
+  .xp-tabs{display:grid;grid-template-columns:290px 1fr;gap:30px;align-items:start;}
+  @media(max-width:760px){.xp-tabs{grid-template-columns:1fr;}}
+  .xp-nav{display:flex;flex-direction:column;gap:8px;}
+  @media(max-width:760px){
+    .xp-nav{flex-direction:row;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;}
+    .xp-nav::-webkit-scrollbar{display:none;}
+    .xp-btn{flex:0 0 auto;}
+    .xp-btn small{display:none;}
+    .xp-btn .yr{display:none;}
+  }
+  .xp-btn{
+    text-align:left;padding:13px 16px;border-radius:12px;cursor:pointer;
+    border:1px solid var(--light);background:var(--card);
+    font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);
+    transition:all .2s;display:flex;justify-content:space-between;align-items:center;gap:8px;
+  }
+  .xp-btn small{display:block;font-weight:400;color:var(--grey);font-size:12.5px;}
+  .xp-btn .yr{font-family:Georgia,serif;font-style:italic;font-size:13px;color:var(--grey);white-space:nowrap;}
+  .xp-btn:hover{border-color:var(--blue);}
+  .xp-btn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .xp-btn.active small,.xp-btn.active .yr{color:rgba(255,255,255,.75);}
+  .xp-panel{
+    background:var(--card);border:1px solid var(--light);border-radius:16px;
+    padding:26px 28px;display:none;animation:fade .4s ease;
+  }
+  .xp-panel.active{display:block;}
+  .xp-panel .role{font-size:21px;font-weight:650;letter-spacing:-.02em;}
+  .xp-panel .org{font-size:15px;color:var(--blue);font-weight:500;margin-top:3px;}
+  .xp-panel .dt{font-size:13px;color:var(--grey);margin-top:2px;}
+  .xp-panel ul{list-style:none;margin-top:14px;}
+  .xp-panel li{
+    font-size:14.5px;line-height:1.6;padding:8px 0 8px 24px;position:relative;
+    border-bottom:1px solid var(--light);
+  }
+  .xp-panel li:last-child{border-bottom:none;}
+  .xp-panel li::before{content:"→";position:absolute;left:0;color:var(--blue);font-size:13px;top:10px;}
+
+  /* ---------- Education ---------- */
+  .edu-highlight{
+    background:linear-gradient(135deg,var(--blue) 0%,#4a2fe0 100%);
+    color:#fff;border-radius:18px;
+    padding:30px 32px;display:flex;justify-content:space-between;
+    gap:24px;flex-wrap:wrap;margin-bottom:26px;position:relative;overflow:hidden;
+  }
+  .edu-highlight::after{
+    content:"◆";position:absolute;right:-30px;bottom:-55px;font-size:200px;opacity:.08;
+  }
+  .edu-highlight .deg{font-size:clamp(21px,3vw,29px);font-weight:660;letter-spacing:-.02em;line-height:1.15;}
+  .edu-highlight .school{color:rgba(255,255,255,.8);margin-top:5px;font-size:14.5px;}
+  .edu-highlight .desc{color:rgba(255,255,255,.72);font-size:13.5px;margin-top:14px;max-width:560px;line-height:1.65;}
+  .edu-highlight .date{color:rgba(255,255,255,.65);font-size:13px;white-space:nowrap;padding-top:8px;}
+  .edu-highlight .badge{
+    display:inline-block;margin-top:14px;padding:6px 15px;
+    border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);
+    border-radius:100px;font-size:12px;letter-spacing:.03em;
+  }
+  .edu-tab-btns{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  .pill-btn{
+    padding:8px 20px;border-radius:100px;border:1px solid var(--light);
+    background:var(--card);font-family:inherit;font-size:13.5px;font-weight:500;
+    cursor:pointer;color:var(--grey);transition:all .2s;
+  }
+  .pill-btn:hover{border-color:var(--blue);color:var(--blue);}
+  .pill-btn.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .edu-pane{display:none;animation:fade .4s ease;}
+  .edu-pane.active{display:block;}
+  .plain-list{list-style:none;}
+  .plain-list li{
+    padding:11px 16px;border:1px solid var(--light);border-radius:12px;
+    background:var(--card);margin-bottom:8px;
+    font-size:14px;display:flex;justify-content:space-between;gap:16px;align-items:baseline;
+    transition:border-color .2s,transform .2s;
+  }
+  .plain-list li:hover{border-color:var(--blue);transform:translateX(4px);}
+  .plain-list li span{color:var(--blue);font-size:12.5px;white-space:nowrap;font-weight:500;}
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal{
+    opacity:0;transform:translateY(26px);
+    transition:opacity .7s ease,transform .8s cubic-bezier(.2,.65,.2,1);
+  }
+  .reveal.visible{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .marquee-track,.roles .flip span{animation:none;}
+    html{scroll-behavior:auto;scroll-snap-type:none;}
+  }
+
+  /* ---------- Contact / footer ---------- */
+  footer{
+    background:var(--ink);color:var(--bg);
+    padding:80px 0 30px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  footer::before{
+    content:"";position:absolute;top:-160px;right:-100px;width:440px;height:440px;
+    background:radial-gradient(circle,rgba(31,47,240,.35),transparent 65%);border-radius:50%;
+  }
+  footer h2{
+    font-size:clamp(34px,6vw,64px);font-weight:650;letter-spacing:-.03em;
+    line-height:1.05;margin-bottom:20px;position:relative;
+  }
+  footer h2 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:#7c8bff;}
+  footer p{color:#a8a8b0;max-width:480px;font-size:15px;position:relative;}
+  footer a{color:var(--bg);}
+  .foot-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;position:relative;}
+  footer .btn{border-color:#555;color:var(--bg);}
+  footer .btn:hover{background:var(--bg);color:var(--ink);border-color:var(--bg);}
+  footer .btn.solid{background:var(--blue);border-color:var(--blue);color:#fff;}
+  footer .btn.solid:hover{background:var(--blue-dark);}
+  .foot-bottom{
+    margin-top:60px;padding-top:22px;border-top:1px solid #333;
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    font-size:13px;color:#8a8a92;position:relative;
+  }
+
+  /* ---------- Project detail ---------- */
+  .detail{padding:calc(var(--navh) + 40px) 0 80px;}
+  .back{
+    display:inline-flex;align-items:center;gap:8px;font-size:14px;
+    color:var(--grey);text-decoration:none;margin-bottom:36px;
+  }
+  .back:hover{color:var(--acc);}
+  .detail .ptag{
+    display:inline-block;background:var(--acc);color:#fff;font-size:12.5px;font-weight:600;
+    padding:5px 15px;border-radius:100px;margin-bottom:18px;letter-spacing:.03em;
+  }
+  .detail h1{
+    font-size:clamp(30px,5vw,52px);font-weight:660;letter-spacing:-.03em;
+    line-height:1.1;max-width:780px;
+  }
+  .detail .sub{font-size:16px;color:var(--grey);margin-top:14px;max-width:620px;}
+  .meta-bar{
+    display:flex;gap:40px;flex-wrap:wrap;margin:36px 0;
+    padding:22px 26px;border-radius:14px;
+    background:color-mix(in srgb,var(--acc) 6%,white);
+    border:1px solid color-mix(in srgb,var(--acc) 20%,white);
+  }
+  .meta-bar div b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);font-weight:600;margin-bottom:4px;}
+  .meta-bar div span{font-size:14px;}
+  .detail-hero{
+    border-radius:16px;border:1px solid var(--light);
+    margin:8px 0 48px;overflow:hidden;aspect-ratio:16/9.2;
+  }
+  @media(max-width:640px){.detail-hero{aspect-ratio:16/10.5;}}
+  .detail-sec{margin-bottom:40px;max-width:680px;}
+  .detail-sec h3{
+    font-size:13px;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--acc);font-weight:650;margin-bottom:14px;
+  }
+  .detail-sec h3 i{font-family:Georgia,serif;font-style:italic;margin-right:8px;}
+  .detail-sec p{font-size:16px;line-height:1.75;}
+  .detail-sec ul{list-style:none;}
+  .detail-sec ul li{
+    font-size:15.5px;line-height:1.7;padding:10px 0 10px 24px;position:relative;
+    border-bottom:1px solid var(--light);
+  }
+  .detail-sec ul li::before{content:"→";position:absolute;left:0;color:var(--acc);font-size:13px;top:13px;}
+  .link-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .link-row .btn.solid{background:var(--acc);border-color:var(--acc);}
+  .pager{
+    display:flex;justify-content:space-between;margin-top:64px;
+    border-top:1px solid var(--light);padding-top:24px;gap:16px;
+  }
+  .pager a{text-decoration:none;font-size:14px;color:var(--grey);}
+  .pager a:hover{color:var(--acc);}
+  .pager b{display:block;color:var(--ink);font-size:15px;font-weight:600;margin-top:2px;}
+
+  .fade{animation:fade .55s cubic-bezier(.2,.65,.2,1);}
+  @keyframes fade{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#/">Yanushi <b>de Mel</b></a>
+    <div class="nav-links">
+      <a href="#/" onclick="goSection('work');return false;">Work</a>
+      <a href="#/" onclick="goSection('about');return false;">About</a>
+      <a href="#/" onclick="goSection('skills');return false;">Skills</a>
+      <a href="#/" onclick="goSection('experience');return false;">Experience</a>
+      <a href="#/" onclick="goSection('education');return false;">Education</a>
+      <a class="nav-cta" href="mailto:ys.demel.2023@scis.smu.edu.sg">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<main id="app"></main>
+
+<script>
+/* =========================================================
+   PROJECT DATA                              <-- REPLACE_ME
+   img: screenshot path (drop files in an "images" folder)
+   frame: "browser" or "phone" mockup
+   Links: URL = button, "soon" = placeholder, null = hidden
+   ========================================================= */
+const PROJECTS = [
+  {
+    slug:"climate-etl",
+    title:"AI-Enabled ETL System for Climate Risk Analytics",
+    short:"Final Year Project, in progress",
+    type:"Data Engineering / AI",
+    date:"May to Dec 2026",
+    tools:"Python, LLM-assisted mapping, Streamlit, ETL design",
+    accent:"#0d9488",
+    img:"images/climate-etl.png",
+    frame:"browser",
+    site:"climate-etl-dashboard",
+    mono:"ETL",
+    overview:"An industry-sponsored Final Year Project for a financial services firm. Financial institutions receive client portfolio data in inconsistent formats, with mismatched field names, structures, and instrument descriptions, and all of it must be interpreted, mapped, validated, and transformed before climate analytics or ESG reporting can happen. My team and I are building a standalone AI-enabled ETL proof of concept that closes that preparation gap.",
+    points:[
+      "Engineering an LLM-assisted mapping engine that infers the semantic meaning of messy source fields, recognising that 'Notional Amt' and 'ntnl_amt' refer to the same concept, and maps them onto a target climate analytics schema of around 50 fields.",
+      "Designing the validation layer: rule-based checks for structural errors and type mismatches, a confidence score on every mapping decision, and human review flags on high-risk fields such as instrument identifiers.",
+      "Logging every transformation decision for auditability, benchmarked against a sponsor-provided answer key with a target of 80%+ mapping accuracy on messy input.",
+      "Building a Streamlit dashboard where portfolio managers review climate risk metrics, ESG scores by instrument type, and transformation status across equities, bonds, CDS, equity options, and swaps."
+    ],
+    outcome:"The build runs through December 2026 and ships to the sponsor as a working codebase, demo, and report. It is deepening my working knowledge of ETL architecture, LLM grounding and guardrails, and how ESG data actually gets used inside financial institutions.",
+    github:"soon", /* REPLACE_ME with your repo URL when ready */
+    video:"soon"   /* REPLACE_ME with a demo URL when ready */,
+    live:null
+  },
+  {
+    slug:"pink-ribbon",
+    title:"Pink Ribbon",
+    short:"Breast cancer patient support app, Her Code Her Cause hackathon",
+    type:"Hackathon / AI Product",
+    date:"2026",
+    tools:"React 19, Vite, Supabase Auth + Postgres, OCR, AI summarisation",
+    accent:"#db2777",
+    img:"images/pink-ribbon.png",
+    frame:"browser",
+    site:"pink-ribbon.app",
+    mono:"PR",
+    overview:"Built at the Open Government Products x Women Devs SG 'Her Code, Her Cause' hackathon, which focused on AI solutions for breast cancer patients. Pink Ribbon is a React app that reduces the mental burden of managing complex medical information for patients and their caretakers.",
+    points:[
+      "Proposed and helped implement the core OCR feature, which scans and summarises doctor documents so patients do not have to decode medical paperwork alone.",
+      "Shipped a shared care schedule and treatment journey tracker, giving patients and caregivers one source of truth for appointments and treatment stages.",
+      "Built a community forum where users post stories and send encouraging notes and virtual gifts, so patients never feel alone.",
+      "Backed the app with Supabase Auth and Postgres, applying row level security policies to protect sensitive patient data."
+    ],
+    outcome:"The OCR feature directly targeted the information overload patients described as their biggest burden. The app is live and the code is public, both linked below.",
+    github:"https://github.com/iimseeya/pink-ribbon",
+    video:null,
+    live:"https://lnkd.in/g_mScaBA"
+  },
+  {
+    slug:"pilates-agent",
+    title:"Pilates Planner Agent",
+    short:"Top 5, LinkedIn Trailblazer Programme 2026",
+    type:"AI Agent",
+    date:"2026",
+    tools:"Chat Chat, Chat and Build, Excel, Google Apps Script",
+    accent:"#7c3aed",
+    img:"images/pilates-agent.jpg",
+    frame:"browser",
+    site:"pilates-planner-agent",
+    mono:"PA",
+    overview:"An AI agent built for a specific use case, Pilates planning, as part of the LinkedIn Trailblazer Programme, where it placed in the top 5. The project was an end-to-end exercise in building, grounding, and shipping an agentic system.",
+    points:[
+      "Trained the agent by curating structured data for its knowledge base so it produced accurate, personalised responses.",
+      "Built a front end using Chat and Build and connected it to Excel for data management, integrated through Google Apps Script.",
+      "Debugged the agent iteratively to raise response quality release by release."
+    ],
+    outcome:"Key learnings: how agents are trained with the right information, how to debug agentic systems for quality output, and how to connect AI agents to external data sources and front-end interfaces. ChatAndBuild featured the programme and this project on their LinkedIn, linked below.",
+    github:null,
+    video:"https://drive.google.com/file/d/1RkgeG4AoFmIv7VMtdGKzytwhv2OfdGuv/view",
+    live:"https://www.linkedin.com/pulse/linkedin-career-trailblazer-camp-chatandbuild-helps-students-hxjuc/",
+    liveLabel:"Featured by ChatAndBuild ↗"
+  },
+  {
+    slug:"inclusive-fintech",
+    title:"Inclusive Fintech and Payment Product Design",
+    short:"Financial access for migrant workers",
+    type:"Product Design / Fintech",
+    date:"Jan to May 2026",
+    tools:"Market sizing, alternative credit scoring design, cost-benefit analysis, Figma",
+    accent:"#d97706",
+    img:"images/inclusive-fintech.png",
+    frame:"browser",
+    site:"migrant-provident-fund.figma.site",
+    mono:"MF",
+    overview:"Singapore's 799,500 migrant Work Permit holders keep its construction, marine, and process industries running, yet formal credit products require S$42,000 in annual income against an average migrant salary of S$9,600. Locked out entirely, workers turn to moneylenders charging 48% per annum or worse. We designed a B2B2C digital banking platform, onboarded through employer payrolls, to close that gap.",
+    points:[
+      "Quantified the opportunity: a S$90.4 million total addressable market across 735,000 banked workers, narrowed to a S$2.71 million year-one obtainable market at 5% penetration of the CMP sector.",
+      "Designed an alternative credit scoring system built on platform behaviour, savings contributions, remittance patterns, and salary consistency, instead of the credit history these workers do not have.",
+      "Structured a joint employer-employee savings fund that earns workers 2% per annum and pools into the capital base for microcredit issued at about 5%, a tenth of licensed moneylender rates.",
+      "Modelled 5-year financial projections and the cost-benefit case, showing break-even in Year 2, and mapped a 12-month rollout from employer acquisition through pilot to full credit launch."
+    ],
+    outcome:"The result is a banking product that is commercially defensible rather than just well-intentioned: every feature traces back to a researched pain point and a revenue line. The Figma prototype and video walkthrough are linked below.",
+    github:null,
+    video:"https://youtu.be/b9Mc_F2anEE",
+    live:"https://migrant-provident-fund.figma.site/",
+    liveLabel:"View prototype ↗"
+  },
+  {
+    slug:"blockchain-payments",
+    title:"CrossMint: Cross-Border Payments for Kenyan SMEs",
+    short:"Blockchain and AI trade finance platform design",
+    type:"Fintech / Blockchain",
+    date:"Jan to May 2026",
+    tools:"Polygon, Solidity, USDC, Chainlink, AI document verification",
+    accent:"#2563eb",
+    img:"images/blockchain-payments.png",
+    frame:"browser",
+    site:"crossmint-trade",
+    mono:"CM",
+    overview:"Kenyan SMEs struggle to participate in cross-border trade: their trade finance requests are rejected at a 50% rate against 7% for large corporations, layered intermediaries push total payment costs to 3 to 7% per transaction, and SWIFT settlement takes 2 to 7 days. CrossMint is our proposed blockchain-enabled platform that lets Kenyan SMEs pay overseas suppliers using stablecoin, AI document verification, and smart contracts that release funds only when both parties are satisfied.",
+    points:[
+      "Mapped the current Letter of Credit and SWIFT workflow end to end to pinpoint exactly where inaccessibility, cost, and latency occur.",
+      "Designed the payment flow: KES converted to USDC through HoneyCoin, funds locked in a Polygon smart contract, release triggered by Chainlink-verified document checks plus buyer confirmation, and payout through corridor partners such as Nium and Thunes.",
+      "Specified the AI layer: invoice extraction with a vision-language model, document verification with on-chain fraud scoring, a payment router that picks the cheapest and fastest corridor, and on-chain trade history that builds a credit profile for each SME.",
+      "Assessed the Kenyan regulatory landscape, from CBK fund safeguarding rules to the VASP Act 2025 and AML/CFT requirements, and showed how the architecture satisfies each one."
+    ],
+    outcome:"The project sharpened my ability to connect emerging technology to a concrete business problem, and to defend a design on regulatory and ecosystem fit rather than novelty. The full slide deck is linked below.",
+    github:null,
+    video:null,
+    live:"https://canva.link/pgcop6yhz2zudsf",
+    liveLabel:"View slide deck ↗"
+  },
+  {
+    slug:"agile-delivery",
+    title:"Agile Product Development and Delivery",
+    short:"Full lifecycle delivery management",
+    type:"Project Management",
+    date:"Aug to Dec 2025",
+    tools:"Scrum, Jira, Vue.js, Python Flask microservices, MySQL, CI",
+    accent:"#16a34a",
+    img:"images/agile-delivery.png",
+    frame:"browser",
+    site:"sprint-board",
+    mono:"AD",
+    overview:"A full-lifecycle Scrum build of a task management system, delivered across 2-week sprints by a team of five. I worked across both the process and the product, from backlog management and estimation through to a working system on a microservices architecture.",
+    points:[
+      "Ran sprint planning, reviews, retrospectives, and stand-ups on a 2-week cadence, estimating user stories with planning poker and tracking product and sprint backlogs in Jira.",
+      "Absorbed mid-project requirement changes the way Scrum intends: kept the frozen sprint intact, sized the new stories at the next planning session, and split ambiguous stories into role-specific ones for staff, HR, and managers.",
+      "Tightened the Definition of Done sprint over sprint, adding requirements to pass the CI pipeline, merge to main without conflicts, and keep ER and C4 diagrams updated.",
+      "Delivered a Vue.js frontend over four Python Flask microservices (tasks, projects, notifications, employees) on MySQL, an architecture chosen to decouple workstreams and cut merge conflicts."
+    ],
+    outcome:"This project is where my classroom knowledge of Agile became working knowledge: estimating honestly, cutting scope deliberately, and keeping a team shipping every sprint. The code is on GitHub below.",
+    github:"https://github.com/casecasee/SPM-G8T5",
+    video:null,
+    live:null
+  }
+];
+
+/* ---------- Experience data (tabs) ---------- */
+const XP = [
+  {role:"Business Analyst Intern",org:"DFS Group Limited (LVMH)",loc:"Singapore",date:"May to Aug 2025",yr:"2025",
+   points:[
+    "Extracted, analysed, and validated data across SAP S/4HANA and Snowflake using SQL and Excel, resolving data issues across cross-functional teams.",
+    "Built project tracking dashboards for delivery and shipment workflows, cutting manual status update requests by about 30%.",
+    "Prepared SOPs and process flows for enterprise systems; 80%+ of business users onboarded without extra support.",
+    "Represented the ERP team in system design, testing, and UAT, and managed test executions and defect tracking as Test Coordinator."
+   ]},
+  {role:"Data Analyst Intern",org:"Quantrax Corporation",loc:"Sri Lanka",date:"Jul 2022 to Aug 2023",yr:"2022",
+   points:[
+    "Performed data validation and issue checking across 3,000+ records ahead of a debt recovery system go-live, cutting discrepancy rates by about 20%.",
+    "Worked with internal teams and external vendors to clarify requirements and validate deliverables across 2 project milestones.",
+    "Coordinated stakeholder communication across teams in 3 time zones to keep the rollout on track."
+   ]},
+  {role:"President",org:"SMU Career Champions",loc:"Dato' Kho Hui Meng Career Centre",date:"Jan 2026 to Present",yr:"2026",
+   points:[
+    "Plans and runs major career events for 150+ participants, owning timelines, logistics, and stakeholder coordination.",
+    "Oversees scheduling, operations, and data tracking across Excel, Google Sheets, and project management tools.",
+    "Previously Business Development Executive, connecting students with industry professionals through curated events."
+   ]},
+  {role:"Student Assistant",org:"Singapore Management University",loc:"Singapore",date:"Sep 2025 to Present",yr:"2025",
+   points:[
+    "Supports delivery of in-person and online courses through logistics and coordination.",
+    "Assists trainers and participants promptly and prepares course venues and materials on time."
+   ]},
+  {role:"Operations Director",org:"ICON Camp 2024, SMU ICON",loc:"Singapore",date:"Mar to Aug 2024",yr:"2024",
+   points:[
+    "Coordinated operational planning for a large-scale camp, overseeing task allocation, timelines, and team execution.",
+    "Organised pre-event logistics and on-ground workflows to keep the programme safe and on schedule."
+   ]}
+];
+
+/* ---------- Screenshot frame builder ----------
+   Shows the real screenshot if the file exists, otherwise a
+   designed gradient cover with the project monogram. */
+function shotHTML(p){
+  const placeholder = `<div class="ph"><div class="mono">${p.mono}</div><div class="cap">${p.type}</div></div>`;
+  const img = `<img src="${p.img}" alt="${p.title} screenshot" loading="lazy" class="${p.fit === "contain" ? "fit-contain" : ""}" onerror="this.remove()">`;
+  if(p.frame === "phone"){
+    return `<div class="shot" title="Add your screenshot at ${p.img}">
+      <div class="frame-phone"><div class="notch"></div><div class="screen">${placeholder}${img}</div></div>
+    </div>`;
+  }
+  return `<div class="shot" title="Add your screenshot at ${p.img}">
+    <div class="frame-browser">
+      <div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">${p.site}</span></div>
+      <div class="screen">${placeholder}${img}</div>
+    </div>
+  </div>`;
+}
+
+/* ---------- Home page ---------- */
+function homeHTML(){
+  const cards = PROJECTS.map((p,i)=>`
+    <a class="card" style="--acc:${p.accent}" href="#/project/${p.slug}">
+      <div class="thumb">
+        <span class="tag">${p.type}</span>
+        ${shotHTML(p)}
+        <span class="idx">${String(i+1).padStart(2,"0")} / 06</span>
+      </div>
+      <h3>${p.title}<span class="arrow">→</span></h3>
+      <div class="meta">${p.date}</div>
+    </a>`).join("");
+
+  const xpBtns = XP.map((x,i)=>`
+    <button class="xp-btn ${i===0?"active":""}" data-xp="${i}" onclick="showXp(${i})">
+      <span>${x.role}<small>${x.org}</small></span>
+      <span class="yr">${x.yr}</span>
+    </button>`).join("");
+
+  const xpPanels = XP.map((x,i)=>`
+    <div class="xp-panel ${i===0?"active":""}" data-xp-panel="${i}">
+      <div class="role">${x.role}</div>
+      <div class="org">${x.org} · ${x.loc}</div>
+      <div class="dt">${x.date}</div>
+      <ul>${x.points.map(pt=>`<li>${pt}</li>`).join("")}</ul>
+    </div>`).join("");
+
+  return `
+  <div class="fade">
+  <header class="hero-page snap">
+    <div class="wrap">
+      <div class="kicker"><span class="dot"></span>Open to 2027 graduate programmes and roles</div>
+      <h1>Yanushi <em>de Mel</em></h1>
+      <div class="roles">I work across
+        <span class="flip">
+          <span>Product Management</span>
+          <span>Business Analysis</span>
+          <span>Tech Consulting</span>
+          <span>Product Management</span>
+        </span>
+      </div>
+      <p>Final year Information Systems student at SMU, Singapore. I like turning messy problems into things that actually work, across product, data, and AI.</p>
+      <div class="hero-cta">
+        <a class="btn solid" href="mailto:ys.demel.2023@scis.smu.edu.sg">Get in touch</a>
+        <a class="btn" href="https://linkedin.com/in/yanushidemel" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="marquee"><div class="marquee-track">
+      <span>SAP S/4HANA</span><span class="diamond">◆</span><span>Snowflake</span><span class="diamond">◆</span><span>SQL</span><span class="diamond">◆</span><span>Python</span><span class="diamond">◆</span><span>Tableau</span><span class="diamond">◆</span><span>Top 5 LinkedIn Trailblazer</span><span class="diamond">◆</span><span>Prima Ceylon Scholar</span><span class="diamond">◆</span><span>Agile</span><span class="diamond">◆</span><span>LVMH</span><span class="diamond">◆</span><span>AI Agents</span><span class="diamond">◆</span><span>SAP S/4HANA</span><span class="diamond">◆</span><span>Snowflake</span><span class="diamond">◆</span><span>SQL</span><span class="diamond">◆</span><span>Python</span><span class="diamond">◆</span><span>Tableau</span><span class="diamond">◆</span><span>Top 5 LinkedIn Trailblazer</span><span class="diamond">◆</span><span>Prima Ceylon Scholar</span><span class="diamond">◆</span><span>Agile</span><span class="diamond">◆</span><span>LVMH</span><span class="diamond">◆</span><span>AI Agents</span><span class="diamond">◆</span>
+    </div></div>
+  </header>
+
+  <section id="work" class="snap">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2><i>01 /</i>Selected Work</h2><span>6 projects · scroll or use arrows</span></div>
+      <div class="carousel-shell reveal">
+        <button class="car-btn prev" onclick="slideWork(-1)" aria-label="Previous project">←</button>
+        <div class="carousel" id="workCarousel">${cards}</div>
+        <button class="car-btn next" onclick="slideWork(1)" aria-label="Next project">→</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="snap">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2><i>02 /</i>About</h2><span>Who I am</span></div>
+      <div class="about-grid reveal">
+        <div class="me-wrap">
+          <span class="me-chip c1">SMU Class of 2027</span>
+          <div class="me-frame"><img src="images/me.jpg" alt="Yanushi de Mel"></div>
+          <span class="me-chip c2">◆ Based in Singapore</span>
+        </div>
+        <div>
+          <p class="about-text">I am an Information Systems student at Singapore Management University with hands-on experience in <mark>business analysis, data operations, and product work</mark> across fintech, luxury retail, and tech. I have worked inside a company-wide ERP transformation at DFS Group (LVMH), validated thousands of records for a debt recovery system rollout at Quantrax, and built AI products at hackathons.</p>
+          <p class="about-text">What ties it together: I am comfortable in the gap between business and technical teams, translating ambiguous requirements into structured deliverables, and I am particularly interested in <mark>how AI shapes financial services, consulting, and product decisions</mark>.</p>
+          <div class="now">
+            <div class="now-title">Right now</div>
+            <ul>
+              <li>Building an AI-enabled ETL system for climate risk analytics as my Final Year Project</li>
+              <li>Leading SMU Career Champions as President</li>
+              <li>Looking for 2027 graduate programmes in product, consulting, and business analysis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="snap">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2><i>03 /</i>Skills</h2><span>Tools I work with</span></div>
+      <div class="skills-grid">
+        <div class="skill-card reveal" style="--acc:#1f2ff0"><div class="num">no. 01</div><div class="cat">Languages</div><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">JavaScript</span><span class="chip">HTML / CSS</span></div></div>
+        <div class="skill-card reveal" style="--acc:#0d9488"><div class="num">no. 02</div><div class="cat">Enterprise &amp; Data Platforms</div><div class="chips"><span class="chip">SAP S/4HANA</span><span class="chip">Snowflake</span><span class="chip">Salesforce</span><span class="chip">OutSystems</span></div></div>
+        <div class="skill-card reveal" style="--acc:#d97706"><div class="num">no. 03</div><div class="cat">Analytics &amp; Visualisation</div><div class="chips"><span class="chip">Tableau</span><span class="chip">Microsoft Excel</span><span class="chip">Google Sheets</span></div></div>
+        <div class="skill-card reveal" style="--acc:#db2777"><div class="num">no. 04</div><div class="cat">Project &amp; Design Tools</div><div class="chips"><span class="chip">Jira</span><span class="chip">Figma</span><span class="chip">Signavio</span><span class="chip">Slack</span></div></div>
+        <div class="skill-card reveal" style="--acc:#7c3aed"><div class="num">no. 05</div><div class="cat">AI</div><div class="chips"><span class="chip">Claude</span><span class="chip">ChatGPT</span><span class="chip">Agent platforms</span><span class="chip">LLM integration</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="snap">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2><i>04 /</i>Experience</h2><span>Click a role to explore</span></div>
+      <div class="xp-tabs reveal">
+        <div class="xp-nav">${xpBtns}</div>
+        <div>${xpPanels}</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="snap">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2><i>05 /</i>Education</h2><span>SMU, Class of 2027</span></div>
+      <div class="edu-highlight reveal">
+        <div>
+          <div class="deg">BSc Information Systems</div>
+          <div class="school">Singapore Management University · 2023 to 2027</div>
+          <div class="desc">Modules include Business Process Analysis and Solutioning, Enterprise Solution Development, Data Management, Web Application Development, Software Project Management, and Financial Accounting.</div>
+          <span class="badge">◆ Prima Ceylon Scholarship, for academic and extracurricular excellence</span>
+        </div>
+        <div class="date">Graduating Aug 2027</div>
+      </div>
+      <div class="reveal">
+        <div class="edu-tab-btns">
+          <button class="pill-btn active" data-edu="hack" onclick="showEdu('hack')">Hackathons &amp; Competitions</button>
+          <button class="pill-btn" data-edu="cert" onclick="showEdu('cert')">Certificates</button>
+        </div>
+        <div class="edu-pane active" data-edu-pane="hack">
+          <ul class="plain-list">
+            <li>Top 5, LinkedIn Trailblazer Programme<span>2026</span></li>
+            <li>Top 10, Product Women x Coffee Meets Bagel Product Hackathon<span>2025</span></li>
+            <li>Open Government Products x Women Devs SG 'Her Code, Her Cause' Hackathon<span>2026</span></li>
+            <li>L'Oreal Brandstorm Participant<span>2026</span></li>
+          </ul>
+        </div>
+        <div class="edu-pane" data-edu-pane="cert">
+          <ul class="plain-list">
+            <li>Google Project Management Professional Certificate<span>Google</span></li>
+            <li>AI Essentials Specialization<span>Google</span></li>
+            <li>Bloomberg Finance Fundamentals<span>Bloomberg</span></li>
+            <li>Claude Code in Action<span>Anthropic</span></li>
+            <li>LVMH Green in Tech Fast Track<span>LVMH</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  ${footerHTML()}`;
+}
+
+function footerHTML(){
+  return `
+  <footer id="contact" class="snap">
+    <div class="wrap">
+      <h2>Let's build <em>something</em> together.</h2>
+      <p>I am looking for 2027 graduate programmes and roles in product management, tech consulting, and business analysis. If you think I could be a fit, I would love to hear from you.</p>
+      <div class="foot-links">
+        <a class="btn solid" href="mailto:ys.demel.2023@scis.smu.edu.sg">ys.demel.2023@scis.smu.edu.sg</a>
+        <a class="btn" href="https://linkedin.com/in/yanushidemel" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <!-- REPLACE_ME: add your GitHub profile URL here as another button when ready -->
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Yanushi de Mel</span>
+        <span>Singapore</span>
+      </div>
+    </div>
+  </footer>`;
+}
+
+/* ---------- Project detail page ----------
+   Link rules: a URL string renders a button, "soon" renders a
+   dashed placeholder, null hides the button entirely. */
+function linkButtons(p){
+  let out = "";
+  if(p.live) out += `<a class="btn solid" href="${p.live}" target="_blank" rel="noopener">${p.liveL
