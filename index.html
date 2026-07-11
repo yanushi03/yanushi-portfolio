@@ -985,7 +985,11 @@ function projectHTML(p){
 /* ---------- Interactions ---------- */
 function slideWork(dir){
   const c = document.getElementById("workCarousel");
-  if(c) c.scrollBy({left:dir*424,behavior:"smooth"});
+  if(!c) return;
+  const card = c.querySelector(".card");
+  if(!card){ c.scrollBy({left:dir*424,behavior:"smooth"}); return; }
+  const gap = parseFloat(getComputedStyle(c).columnGap || getComputedStyle(c).gap) || 0;
+  c.scrollBy({left:dir*(card.getBoundingClientRect().width+gap),behavior:"smooth"});
 }
 
 function showXp(i){
